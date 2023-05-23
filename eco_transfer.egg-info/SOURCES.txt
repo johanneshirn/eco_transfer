@@ -1,0 +1,5 @@
+setup.py
+eco_transfer.egg-info/PKG-INFO
+eco_transfer.egg-info/SOURCES.txt
+eco_transfer.egg-info/dependency_links.txt
+eco_transfer.egg-info/top_level.txt
