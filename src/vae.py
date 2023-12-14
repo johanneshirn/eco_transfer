@@ -49,8 +49,13 @@ def split_val(patches : pd.DataFrame,
         train_df = patches
         val_df = patches
     else:
+        # train_df = patches.sample(frac=1-val_split)
+        # val_df = patches.iloc[patches.index.difference(train_df.index)].reset_index(drop=True)
+        # train_df = train_df.reset_index(drop=True)
+
         train_df = patches.sample(frac=1-val_split)
-        val_df = patches.iloc[patches.index.difference(train_df.index)].reset_index(drop=True)
+        val_index = patches.index.difference(train_df.index)
+        val_df = patches.loc[val_index].reset_index(drop=True)
         train_df = train_df.reset_index(drop=True)
 
 #    display(train_df)
@@ -131,7 +136,7 @@ def build_vae(config : dict):
     
     def vae_loss(input_img,
                 output,
-                beta : float=1):
+                beta : float=beta):
 
         if config['reconstruction_loss'] == 'mse':
             reconstruction_loss = K.sum(K.square(output-input_img))
